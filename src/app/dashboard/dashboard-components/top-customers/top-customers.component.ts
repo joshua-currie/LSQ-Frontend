@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Product,TopCustomers} from './top-customers-data';
+import { TopcustomersDataService } from '../../../services/topcustomers-data.service';
 
 @Component({
   selector: 'app-top-customers',
@@ -7,14 +7,19 @@ import {Product,TopCustomers} from './top-customers-data';
 })
 export class TopCustomersComponent implements OnInit {
 
-  topCustomers:Product[];
+  data: any;
 
-  constructor() {
-
-    this.topCustomers=TopCustomers;
-  }
+  constructor(private dataService: TopcustomersDataService) {}
 
   ngOnInit(): void {
+    this.dataService.getComponentData('topcustomers').subscribe(
+      (data) => {
+        this.data = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
 
 }

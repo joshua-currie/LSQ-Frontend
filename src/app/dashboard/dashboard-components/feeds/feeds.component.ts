@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Feeds,Feed } from './feeds-data';
+import { FeedDataService } from '../../../services/feed-data.service';
 
 @Component({
   selector: 'app-feeds',
@@ -7,14 +7,19 @@ import { Feeds,Feed } from './feeds-data';
 })
 export class FeedsComponent implements OnInit {
 
-  feeds:Feed[];
+  data: any;
 
-  constructor() {
-
-    this.feeds = Feeds;
-  }
+  constructor(private dataService: FeedDataService) {}
 
   ngOnInit(): void {
+    this.dataService.getComponentData('feeds').subscribe(
+      (data) => {
+        this.data = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
 
 }

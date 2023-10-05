@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {blogcard,blogcards} from './blog-cards-data';
+import { BlogDataService } from '../../../services/blog-data.service';
 
 @Component({
   selector: 'app-blog-cards',
@@ -7,14 +7,18 @@ import {blogcard,blogcards} from './blog-cards-data';
 })
 export class BlogCardsComponent implements OnInit {
 
-  blogcards:blogcard[];
+  data: any;
 
-  constructor() { 
-
-    this.blogcards=blogcards;
-  }
+  constructor(private dataService: BlogDataService) {}
 
   ngOnInit(): void {
+    this.dataService.getComponentData('blogs').subscribe(
+      (data) => {
+        this.data = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
-
 }

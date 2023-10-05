@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {topcard,topcards} from './top-cards-data';
+import { TopcardsDataService } from '../../../services/topcards-data.service';
 
 @Component({
   selector: 'app-top-cards',
@@ -7,14 +7,18 @@ import {topcard,topcards} from './top-cards-data';
 })
 export class TopCardsComponent implements OnInit {
 
-  topcards:topcard[];
+  data: any;
 
-  constructor() { 
-
-    this.topcards=topcards;
-  }
+  constructor(private dataService: TopcardsDataService) {}
 
   ngOnInit(): void {
+    this.dataService.getComponentData('topcards').subscribe(
+      (data) => {
+        this.data = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
-
 }
