@@ -1,59 +1,34 @@
-# Enigneer take home project 
+Joshua Currie - LSQ SWE Intern Take Home Assessment
 
-### The Project
-Complete an in progress Dashboard that gives a user insights into their accounts receivable.  You will be updating the dashboard to get "live" data from an API service as well as adding a new graph to show their monthly sales over time.
+NOTE: This assessment consists of two repositories, one for front and and one for backend. 
 
-### Requirements
-* Create a simple API service using your favorite language, that will return the data needed for the dashboard components.  The data for each component can be found in the following files:
-  * [Blogs](./src/app/dashboard/dashboard-components/blog-cards/blog-cards-data.ts)
-  * [Feeds](./src/app/dashboard/dashboard-components/feeds/feeds-data.ts)
-  * [Monthly Sales](./src/app/dashboard/dashboard-components/monthly-sales/monthly-sales-data.ts)
-  * [Top Cards](./src/app/dashboard/dashboard-components/top-cards/top-cards-data.ts)
-  * [Top Customers](./src/app/dashboard/dashboard-components/top-customers/top-customers-data.ts)
-* Update the angular application to use the api service to get the data needed for the dashboard.  
-* Create a new component using [chart.js](https://www.chartjs.org/) to visualize the users Monthly Sales in a clear and intuitive manner. [A shell component has been started for you.](./src/app/dashboard/dashboard-components/monthly-sales)
-
-### Technical Requirements
-* The API service can be written in the language of your choice, but you must include instructions on how to run it and how to interact with it
-* Be sure to consider edge cases and error handling
-* You will need to have Node.js and npm installed to build the angular application
-  * [Downloading and installing Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-* Have fun and be creative!
-
-### Duration
-While we do not anticipate this taking more than a few hours, we understand that life happens and we want you to have as much time as you need to complete the project.  You will have 1 week to complete this task.  Feel free to reach out to us if you feel like you need more time.
-
-### Submission
-Submit your finished project with notes on how to run it in an email to Christoper Fontaine cfontaine@lsq.com.
-
-Feel free to reach out with any questions.
+This is the FRONTEND repository. The BACKEND repository can be found here.
 
 ---
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
-### Installing packages
-* Prior to running the angular application for the first time you will need to install the required packages with the command `npm install`
+The follow contain steps to run the application with the assumption that the user has access to both repositories (Frontend and Backend)
 
-### Development server
+1. Create a local copy of both the frontend repository and backend repository.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+   Lets start with the backend
 
-### Code scaffolding
+2. In the terminal meant to run the backend, navigate into the directory containing the backend project. 
+HINT: If you do the ‘ls’ command, you should see Angular-Component-data, Api-Service, run_apis.bat, and run_apis.sh.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3. Once in the right directory, run either run_apis.bat or run_apis.bat depending on your operating system and other external configurations. 
+NOTE: because the python api scripts involve the flask library and flask cors, it might be necessary to install flask/flask_cors if it is not install already (pip install flask_cors)
 
-### Build
+4. The backend and API services should be live now on ports:5000, 5001, 5002, 5003, and 5004. One for each individual API in order to promote isolation and flexibility.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+   Time for the frontend
 
-### Running unit tests
+5. In the terminal meant to run the frontend, navigate into the directory containing the backend project. 
+Hint: If you do the ‘ls’ command, you should see the src folder within this directory.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+6. Then, provide node.js is already installed, run npm install.
 
-### Running end-to-end tests
+7. After that, run npm uninstall ng2-charts, and then npm install ng2-charts@2.3.0 to change the charts library into a more stable version.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+8. Then, Using the Angular CLI run ng serve in order to launch the browser application
 
-### Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+9. In a browser, go to http://localhost:4200/ in order to view the application. 
