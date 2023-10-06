@@ -2,7 +2,7 @@ Joshua Currie - LSQ SWE Intern Take Home Assessment
 
 NOTE: This assessment consists of two repositories, one for frontend and one for backend. 
 
-This is the FRONTEND repository. The BACKEND repository can be found here.
+This is the FRONTEND repository. The BACKEND repository can be found [here](https://github.com/joshua-currie/LSQ-Backend).
 
 ---
 
