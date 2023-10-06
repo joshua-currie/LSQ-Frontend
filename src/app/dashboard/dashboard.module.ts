@@ -7,6 +7,8 @@ import { FeedsComponent } from "./dashboard-components/feeds/feeds.component";
 import { TopCustomersComponent } from "./dashboard-components/top-customers/top-customers.component";
 import { TopCardsComponent } from "./dashboard-components/top-cards/top-cards.component";
 import { BlogCardsComponent } from "./dashboard-components/blog-cards/blog-cards.component";
+import { MonthlySalesComponent } from "./dashboard-components/monthly-sales/monthly-sales.component";
+import { ChartsModule } from 'ng2-charts';
 
 
 const routes: Routes = [
@@ -22,6 +24,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    ChartsModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -32,7 +35,8 @@ const routes: Routes = [
     FeedsComponent,
     TopCustomersComponent,
     TopCardsComponent,
-    BlogCardsComponent
+    BlogCardsComponent,
+    MonthlySalesComponent
   ],
 })
 export class DashboardModule {}
