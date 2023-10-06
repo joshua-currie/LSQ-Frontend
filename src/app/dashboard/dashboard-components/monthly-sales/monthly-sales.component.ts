@@ -3,38 +3,55 @@ import { MonthlysalesDataService } from '../../../services/monthlysales-data.ser
 import { ChartType } from 'chart.js';
 
 @Component({
-  selector: 'app-monthly-sales',
-  templateUrl: './monthly-sales.component.html'
+    selector: 'app-monthly-sales',
+    templateUrl: './monthly-sales.component.html'
 })
 export class MonthlySalesComponent implements OnInit {
 
-  // Properties for the chart
-  public barChartOptions = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
+    // Properties for the chart
+    public barChartOptions = {
+        scaleShowVerticalLines: false,
+        responsive: true
+    };
 
-  public barChartLabels: string[] = [];  // Explicitly define it as string array
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartData: { data: number[], label: string }[] = [ // Explicitly define data as number array
-  { data: [], label: 'Monthly Sales' }
-];
+    public barChartLabels: string[] = [];
+    public barChartType: ChartType = 'bar';
+    public barChartLegend = true;
+    public barChartData: { data: number[], label: string }[] = [
+        { data: [], label: 'Monthly Sales' }
+    ];
+
+    data: any;
+
+    constructor(private dataService: MonthlysalesDataService) {}
+
+    ngOnInit(): void {
+      this.dataService.getComponentData('monthlysales').subscribe(
+          (data: any) => {
+              this.data = data;
+              
+              // Combine Labels and Data
+              const combinedData = data.map((item: { invoice_month: any; invoice_year: any; amount: string; }) => {
+                  return {
+                      date: `${item.invoice_month}-${item.invoice_year}`,
+                      sales: parseFloat(item.amount)
+                  };
+              });
   
-  data: any;
-
-  constructor(private dataService: MonthlysalesDataService) {}
-
-  ngOnInit(): void {
-    this.dataService.getComponentData('blogs').subscribe(
-      (data: any[]) => {
-        this.data = data;
-        this.barChartLabels = data.map(item => `${item.invoice_month}-${item.invoice_year}`);
-        this.barChartData[0].data = data.map(item => parseFloat(item.amount));
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
-  }
+              // Sort Combined Data
+              combinedData.sort((a: { date: string; }, b: { date: string; }) => {
+                  const dateA = new Date(a.date.split('-')[1] + '-' + a.date.split('-')[0] + '-01');
+                  const dateB = new Date(b.date.split('-')[1] + '-' + b.date.split('-')[0] + '-01');
+                  return dateA.getTime() - dateB.getTime();
+              });
+  
+              // Split Combined Data Back
+              this.barChartLabels = combinedData.map((item: { date: any; }) => item.date);
+              this.barChartData[0].data = combinedData.map((item: { sales: any; }) => item.sales);
+          },
+          (error: any) => {
+              console.error('Error fetching data:', error);
+          }
+      );
+    }
 }
